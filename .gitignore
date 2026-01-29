@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+build/
+dist/
+
+# Environments
+.env
+.env.*
+.venv/
+venv/
+env/
+
+# Data / artifacts (large files)
+rag_data/
+document/
+*.pdf
+*.npy
+*.npz
+*.pt
+*.bin
+*.safetensors
+*.ckpt
+*.onnx
+*.gguf
+*.ggml
+*.model
+
+# Hugging Face cache (optional)
+hf_cache/
+hf_cache/hub/models--huyydangg--DEk21_hcmute_embedding/
+.cache/
+huggingface/
+
+# Logs
+*.log
