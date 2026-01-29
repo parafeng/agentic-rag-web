@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agentic RAG Local</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <main class="app">
+      <header class="hero">
+        <div class="title">Agentic RAG Local</div>
+        <div class="subtitle">Local Q&amp;A UI for your Ollama-powered server</div>
+      </header>
+
+      <section id="chat" class="chat" aria-live="polite"></section>
+
+      <form id="composer" class="composer" autocomplete="off">
+        <textarea
+          id="input"
+          rows="2"
+          placeholder="Ask a question..."
+          aria-label="Question"
+        ></textarea>
+        <button id="send" type="submit">Send</button>
+      </form>
+
+      <div class="hint">
+        Server: <span id="server-url"></span> &middot; Add <code>?server=http://IP:8000</code> to override
+      </div>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "_meta": {
+    "embed_backend": "hf",
+    "embed_model": "huyydangg/DEk21_hcmute_embedding",
+    "chunk_size": 1200,
+    "chunk_overlap": 200,
+    "updated_at": "2026-01-29T05:19:10.208253+00:00",
+    "doc_dir": "D:\\Project\\agentic-rag-web\\document"
+  },
+  "files": {
+    "document/5.11. Luat Thuong mai 2005.pdf": {
+      "sha256": "ce2d974f9b49306861239d9973b4851384205186786075deace26a4923b0c81e",
+      "size": 867401,
+      "mtime": 1769659783
+    },
+    "document/Bo_luat_Hinh_su_nam_2015_sd_bs_nam_2017_va_van_ban_huong_dan_thi_hanh_cap_nhat_thang_02_nam_2022_part01.pdf": {
+      "sha256": "88d9aaef093f1d8527443821ecf0c2d847941370e4a22f4c52c755b3d3b05d34",
+      "size": 3205363,
+      "mtime": 1769659538
+    },
+    "document/VanBanGoc_45.2013.QH13.pdf": {
+      "sha256": "e60dfb3e9da515b0c7dda4691a7200dbac83856ec96a8a13e242fb3388ec4d41",
+      "size": 1188483,
+      "mtime": 1769659754
+    },
+    "document/VanBanGoc_92.2015.QH13.P1.pdf": {
+      "sha256": "13078482b762a37e5175e97a98090d222a2e8219ebbada4f4ce0fea2ce95c583",
+      "size": 1249398,
+      "mtime": 1769659709
+    }
+  }
+}
