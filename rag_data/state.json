@@ -4,8 +4,9 @@
     "embed_model": "huyydangg/DEk21_hcmute_embedding",
     "chunk_size": 1200,
     "chunk_overlap": 200,
-    "updated_at": "2026-01-29T05:19:10.208253+00:00",
-    "doc_dir": "D:\\Project\\agentic-rag-web\\document"
+    "updated_at": "2026-01-29T08:24:31.583517+00:00",
+    "doc_dir": "D:\\Project\\agentic-rag-web\\document",
+    "use_faiss": true
   },
   "files": {
     "document/5.11. Luat Thuong mai 2005.pdf": {

@@ -2,8 +2,10 @@
 
 Du an RAG cuc bo (local) cho tai lieu PDF, ket hop:
 - Embedding Hugging Face (Sentence-Transformers)
+- (Tuy chon) FAISS de truy van nhanh hon
+- (Tuy chon) Reranker de tang do chinh xac
 - LLM cuc bo qua Ollama
-- Giao dien web don gian de hoi dap
+- Giao dien web co hien citations
 
 ## Yeu cau
 - Python 3.10+ (khuyen nghi 3.11+)
@@ -21,11 +23,18 @@ RAG_CHUNK_SIZE=1200
 RAG_CHUNK_OVERLAP=200
 RAG_TOP_K=4
 RAG_MAX_CONTEXT_CHARS=4000
+RAG_USE_FAISS=1
+RAG_RERANK_ENABLED=1
+RAG_RERANK_MODEL=namdp-ptit/ViRanker
+RAG_RERANK_DEVICE=cpu
+RAG_RERANK_BATCH_SIZE=8
+RAG_RERANK_TOP_K=8
 ```
 
 ## Cai dat thu vien
 ```
 pip install -U sentence-transformers torch transformers huggingface-hub pypdf numpy requests
+pip install -U faiss-cpu
 ```
 
 Neu gap loi `torchvision::nms`, chay:
@@ -54,6 +63,13 @@ python ingest.py
 Neu muon re-index toan bo:
 ```
 python ingest.py --reindex-all
+```
+
+Neu bat FAISS, file `rag_data/index.faiss` se duoc tao.
+
+Neu muon tat reranker (de nhe hon):
+```
+set RAG_RERANK_ENABLED=0
 ```
 
 ## Chay server API
@@ -92,11 +108,17 @@ python client.py --query "Cau hoi cua ban"
 
 ## Thu muc quan trong
 - `ingest.py`: doc PDF, chunk, embed, luu index/embeddings
-- `rag_index.py`: load index, truy van top-k, tao context
+- `rag_index.py`: load index, truy van top-k, rerank, tao context
 - `server.py`: API + CrewAI, goi RAG va LLM
 - `rag_data/`: luu index.json, embeddings.npy, state.json
 - `document/`: chua PDF
 - `web/`: giao dien chat
+
+## Danh gia nhanh (retrieval)
+Chay bo cau hoi mau:
+```
+python eval/run_eval.py --show
+```
 
 ## Xu ly loi thuong gap
 1) **Ollama loi thieu RAM**
@@ -117,6 +139,12 @@ python client.py --query "Cau hoi cua ban"
    - Chay lai:
      ```
      python ingest.py
+     ```
+
+4) **FAISS chua cai**
+   - Neu log bao khong co FAISS, cai:
+     ```
+     pip install -U faiss-cpu
      ```
 
 ## Ghi chu

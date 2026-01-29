@@ -84,6 +84,13 @@ body {
   box-shadow: 0 10px 30px rgba(31, 26, 23, 0.1);
   animation: pop-in 220ms ease-out;
   white-space: pre-wrap;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.msg-body {
+  white-space: pre-wrap;
 }
 
 .msg.user {
@@ -105,6 +112,29 @@ body {
   margin-left: 4px;
   animation: blink 900ms infinite;
   color: var(--accent);
+}
+
+.citations {
+  border-top: 1px dashed rgba(31, 26, 23, 0.18);
+  padding-top: 8px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.citations-title {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-size: 0.72rem;
+}
+
+.citations ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
+
+.citations li {
+  margin: 4px 0;
 }
 
 .composer {
@@ -217,4 +247,116 @@ button:disabled {
     animation: none !important;
     transition: none !important;
   }
+}
+
+
+/* Enhanced message styling */
+.msg {
+  position: relative;
+  padding: 14px 16px;
+}
+
+.msg.assistant {
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.78));
+  border: 1px solid rgba(31, 26, 23, 0.08);
+  box-shadow: 0 16px 36px rgba(31, 26, 23, 0.12);
+}
+
+.msg.user {
+  background: linear-gradient(135deg, #1e6b66, #15504c);
+  color: #fdf7f0;
+}
+
+.msg.user::after {
+  content: "";
+  position: absolute;
+  right: -10px;
+  top: 18px;
+  border-width: 8px 0 8px 10px;
+  border-style: solid;
+  border-color: transparent transparent transparent #1e6b66;
+}
+
+.msg.assistant::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 18px;
+  border-width: 8px 10px 8px 0;
+  border-style: solid;
+  border-color: transparent rgba(255, 255, 255, 0.9) transparent transparent;
+}
+
+.msg-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  letter-spacing: 0.3px;
+}
+
+.msg-role {
+  padding: 2px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.65rem;
+}
+
+.msg-time {
+  margin-left: auto;
+  opacity: 0.6;
+}
+
+.msg.user .msg-role {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff5ea;
+}
+
+.msg.assistant .msg-role {
+  background: rgba(30, 107, 102, 0.12);
+  color: var(--teal);
+}
+
+.citations {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px dashed rgba(31, 26, 23, 0.18);
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+
+.citations-title {
+  cursor: pointer;
+}
+
+.citations[open] .citations-title {
+  margin-bottom: 6px;
+}
+
+.citation-list {
+  display: grid;
+  gap: 8px;
+}
+
+.citation-item {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(31, 26, 23, 0.08);
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+.citation-source {
+  font-weight: 600;
+  font-size: 0.78rem;
+}
+
+.citation-snippet {
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+
+.citations-title::-webkit-details-marker {
+  display: none;
 }

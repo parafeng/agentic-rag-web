@@ -1,0 +1,22 @@
+[
+  {
+    "id": "tm_2005_def",
+    "question": "Luat Thuong mai 2005 dinh nghia hoat dong thuong mai la gi?",
+    "expected_sources": ["5.11. Luat Thuong mai 2005.pdf"]
+  },
+  {
+    "id": "luat_45_2013",
+    "question": "Van ban goc 45/2013/QH13 noi ve linh vuc gi?",
+    "expected_sources": ["VanBanGoc_45.2013.QH13.pdf"]
+  },
+  {
+    "id": "luat_92_2015",
+    "question": "Van ban goc 92/2015/QH13 noi ve van de gi?",
+    "expected_sources": ["VanBanGoc_92.2015.QH13.P1.pdf"]
+  },
+  {
+    "id": "hinh_su_2015",
+    "question": "Bo luat Hinh su 2015 sua doi 2017 la tai lieu nao?",
+    "expected_sources": ["Bo_luat_Hinh_su_nam_2015_sd_bs_nam_2017"]
+  }
+]

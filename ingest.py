@@ -9,7 +9,7 @@ from pathlib import Path
 import numpy as np
 from pypdf import PdfReader
 
-from rag_index import RAGSettings, embed_texts
+from rag_index import RAGSettings, embed_texts, normalize_embeddings
 
 
 def normalize_text(text: str) -> str:
@@ -176,11 +176,23 @@ def main() -> None:
             raise RuntimeError("Embedding dimensions changed; re-run with --reindex-all.")
         all_embeddings = np.vstack([kept_embeddings, new_embeddings])
 
+    all_embeddings = normalize_embeddings(all_embeddings).astype(np.float32)
+
     for idx, item in enumerate(all_items):
         item["id"] = idx
 
     index_path.write_text(json.dumps(all_items, ensure_ascii=False, indent=2), encoding="utf-8")
     np.save(embeddings_path, all_embeddings)
+
+    if settings.use_faiss and all_embeddings.size > 0:
+        try:
+            import faiss  # type: ignore
+
+            index = faiss.IndexFlatIP(all_embeddings.shape[1])
+            index.add(all_embeddings)
+            faiss.write_index(index, str(settings.data_dir / "index.faiss"))
+        except Exception as exc:
+            print(f"FAISS not available, skipped building index.faiss: {exc}")
 
     meta = {
         "embed_backend": settings.embed_backend,
@@ -189,6 +201,7 @@ def main() -> None:
         "chunk_overlap": settings.chunk_overlap,
         "updated_at": datetime.now(timezone.utc).isoformat(),
         "doc_dir": str(settings.doc_dir),
+        "use_faiss": settings.use_faiss,
     }
     save_state(state_path, meta, current_files)
 

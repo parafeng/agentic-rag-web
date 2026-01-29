@@ -21,6 +21,25 @@ if importlib.util.find_spec("fastmcp") is None:
 # Default Ollama base URL is http://localhost:11434
 llm = LLM(model="ollama/qwen3")
 
+
+def _format_citations(results):
+    citations = []
+    for item in results:
+        text = (item.get("text") or "").strip()
+        snippet = text[:220] + ("..." if len(text) > 220 else "")
+        citations.append(
+            {
+                "source": item.get("source_path", "unknown"),
+                "page_start": item.get("page_start"),
+                "page_end": item.get("page_end"),
+                "score": item.get("score"),
+                "rerank_score": item.get("rerank_score"),
+                "snippet": snippet,
+            }
+        )
+    return citations
+
+
 class AgenticRAGAPI(ls.LitAPI):
     def setup(self, device):
         base_dir = Path(__file__).resolve().parent
@@ -52,19 +71,22 @@ class AgenticRAGAPI(ls.LitAPI):
             tasks=[answer_task],
             verbose=True,
         )
+        self.last_citations = []
 
     def decode_request(self, request):
         return request["query"]
 
     def predict(self, query):
         context = ""
+        self.last_citations = []
         if self.rag_index and self.rag_index.available:
             results = self.rag_index.query(query)
             context = build_context(results, self.rag_settings)
+            self.last_citations = _format_citations(results)
         return self.crew.kickoff(inputs={"query": query, "context": context})
 
     def encode_response(self, output):
-        return {"output": output}
+        return {"output": output, "citations": self.last_citations}
 
 if __name__ == "__main__":
     api = AgenticRAGAPI()
